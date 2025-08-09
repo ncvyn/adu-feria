@@ -55,9 +55,10 @@
       <div
         class="grid items-stretch grid-cols-1 gap-8 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
       >
-        <template x-for="res in responses">
+        <template x-for="(res, i) in responses">
           <div
             class="border-2 shadow-lg border-base-content/20 card bg-base-100 hover:bg-base-200"
+            @click="Function(`mdl${i}.showModal()`)"
           >
             <figure>
               <img :src="res.image" alt="Shoes" />
@@ -67,9 +68,25 @@
                 class="badge badge-soft badge-primary"
                 x-text="res.serviceType"
               ></div>
-              <h2 class="card-title" x-text="res.serviceName"></h2>
-              <p x-text="res.description"></p>
+              <div class="flex items-center justify-between">
+                <h2 class="card-title" x-text="res.serviceName"></h2>
+                <span class="text-xl" x-text="`₱${res.price}`"></span>
+              </div>
             </div>
+
+            <dialog :id="`mdl${i}`" class="modal modal-bottom md:modal-middle">
+              <div class="modal-box">
+                <form method="dialog">
+                  <button
+                    class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
+                  >
+                    ✕
+                  </button>
+                </form>
+                <h3 class="text-lg font-bold" x-text="res.serviceName"></h3>
+                <p class="py-4" x-text="res.description"></p>
+              </div>
+            </dialog>
           </div>
         </template>
       </div>

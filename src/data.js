@@ -71,7 +71,7 @@ Alpine.data('data', () => ({
       serviceType: 'Others',
       serviceName: 'business',
       description: 'description',
-      price: 'Php 457',
+      price: '457',
       image: '',
     });
   },
