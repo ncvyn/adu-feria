@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="src/data.js" defer></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <title>Inside the Nest</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body x-data="data" class="select-none">
+  <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-2 shadow">
+          <li><a class="text-lg">Home</a></li>
+          <li><a class="text-lg">Marketplace</a></li>
+          <li><a class="text-lg">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal gap-x-8">
+        <li><a @click="setPath('nest')" class="text-lg">The Nest</a></li>
+        <li><a @click="setPath('/')" class="text-lg">(logo)</a></li>
+        <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end"></div>
+  </div>
+
+  <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
+
+  <div class="nest">
+    <p class="text-gray-400" x-show="isLoading">Loading Identities...</p>
+    <div class="m-3 gap-8 items-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7">
+      <template x-for="res in responses">
+        <div class="card bg-base-100 hover:bg-base-200 shadow-sm">
+          <figure>
+            <img :src="res.image" alt="Shoes" />
+          </figure>
+          <div class="card-body">
+            <div class="badge badge-soft badge-primary" x-text="res.serviceType"></div>
+            <h2 class="card-title" x-text="res.serviceName"></h2>
+            <p x-text="res.description"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</body>
+
+</html>
