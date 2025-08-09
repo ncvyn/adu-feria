@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,13 +9,13 @@
   </head>
 
   <body x-data="data" class="select-none">
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="shadow-sm navbar bg-base-100">
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              class="w-5 h-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -30,7 +30,7 @@
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-40 p-2 shadow"
+            class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box z-1"
           >
             <li><a class="text-lg">Home</a></li>
             <li><a class="text-lg">Marketplace</a></li>
@@ -38,7 +38,7 @@
           </ul>
         </div>
       </div>
-      <div class="navbar-center hidden lg:flex">
+      <div class="hidden navbar-center lg:flex">
         <ul class="menu menu-horizontal gap-x-8">
           <li><a @click="setPath('nest')" class="text-lg">The Nest</a></li>
           <li><a @click="setPath('/')" class="text-lg">(logo)</a></li>
@@ -53,10 +53,12 @@
     <div class="nest">
       <p class="text-gray-400" x-show="isLoading">Loading Identities...</p>
       <div
-        class="m-3 gap-8 items-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
+        class="grid items-stretch grid-cols-1 gap-8 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
       >
         <template x-for="res in responses">
-          <div class="card bg-base-100 hover:bg-base-200 shadow-sm">
+          <div
+            class="border-2 shadow-lg border-base-content/20 card bg-base-100 hover:bg-base-200"
+          >
             <figure>
               <img :src="res.image" alt="Shoes" />
             </figure>

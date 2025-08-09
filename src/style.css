@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @plugin "daisyui" {
-  themes: light --default --prefersdark;
+  themes: light --default, dark --prefersdark;
 }
 
 [x-cloak] {
