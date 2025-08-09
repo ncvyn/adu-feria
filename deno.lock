@@ -2,6 +2,7 @@
   "version": "5",
   "specifiers": {
     "npm:@tailwindcss/vite@^4.1.11": "4.1.11_vite@7.0.6__picomatch@4.0.3",
+    "npm:alpinejs@^3.14.9": "3.14.9",
     "npm:daisyui@^5.0.50": "5.0.50",
     "npm:tailwindcss@^4.1.11": "4.1.11",
     "npm:vite@^7.0.4": "7.0.6_picomatch@4.0.3"
@@ -422,6 +423,21 @@
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
     },
+    "@vue/reactivity@3.1.5": {
+      "integrity": "sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==",
+      "dependencies": [
+        "@vue/shared"
+      ]
+    },
+    "@vue/shared@3.1.5": {
+      "integrity": "sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA=="
+    },
+    "alpinejs@3.14.9": {
+      "integrity": "sha512-gqSOhTEyryU9FhviNqiHBHzgjkvtukq9tevew29fTj+ofZtfsYriw4zPirHHOAy9bw8QoL3WGhyk7QqCh5AYlw==",
+      "dependencies": [
+        "@vue/reactivity"
+      ]
+    },
     "chownr@3.0.0": {
       "integrity": "sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g=="
     },
@@ -680,6 +696,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@tailwindcss/vite@^4.1.11",
+        "npm:alpinejs@^3.14.9",
         "npm:daisyui@^5.0.50",
         "npm:tailwindcss@^4.1.11",
         "npm:vite@^7.0.4"
