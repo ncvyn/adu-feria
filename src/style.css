@@ -4,6 +4,17 @@
   themes: light --default, dark --prefersdark;
 }
 
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  & {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 [x-cloak] {
   display: none !important;
 }
