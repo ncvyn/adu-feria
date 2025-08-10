@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  class="bg-linear-90 from-slate-400 to-slate-800 scrollbar-hidden"
+  class="bg-linear-180 from-slate-200 to-slate-400 scrollbar-hidden bg-no-repeat bg-cover h-screen bg-fixed"
 >
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,9 @@
   </head>
 
   <body x-data="data" class="select-none">
-    <div class="shadow-sm navbar bg-base-100 fixed top-0 z-50">
+    <div
+      class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2"
+    >
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -33,7 +35,7 @@
           </div>
           <ul
             tabindex="0"
-            class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box z-1"
+            class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box"
           >
             <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
             <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
@@ -41,16 +43,20 @@
         </div>
       </div>
       <div class="hidden navbar-center lg:flex">
-        <ul class="menu menu-horizontal gap-x-8">
+        <ul class="menu menu-horizontal gap-x-18 p-0 items-center">
           <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
-          <li><a @click="setPath('/')" class="text-lg">(logo)</a></li>
+          <li>
+            <a @click="setPath('/')" class="p-0"
+              ><img class="w-20 h-20" src="feria.svg"
+            /></a>
+          </li>
           <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
         </ul>
       </div>
       <div class="navbar-end"></div>
     </div>
 
-    <div class="my-24">
+    <div class="my-28">
       <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
 
       <div x-show="currentPath == 'feria'" x-transition>
@@ -60,17 +66,14 @@
         >
           <template x-for="(res, i) in responses">
             <div
-              class="border-2 shadow-lg border-base-content/20 card bg-base-100 hover:bg-base-200 dark:hover:contrast-80"
+              class="border-2 shadow-lg border-base-content/20 card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105 transition-transform duration-150"
               @click="Function(`mdl${i}.showModal()`)"
             >
               <figure>
-                <img :src="res.image" alt="Shoes" />
+                <!-- <img :src="res.image" alt="Shoes" /> -->
               </figure>
               <div class="card-body">
-                <div
-                  class="badge badge-soft badge-primary"
-                  x-text="res.serviceType"
-                ></div>
+                <div class="badge badge-primary" x-text="res.serviceType"></div>
                 <div class="flex items-center justify-between">
                   <h2 class="card-title" x-text="res.serviceName"></h2>
                   <span class="text-xl" x-text="`₱${res.price}`"></span>
@@ -79,9 +82,9 @@
 
               <dialog
                 :id="`mdl${i}`"
-                class="modal modal-bottom md:modal-middle"
+                class="transition-none modal modal-bottom md:modal-middle"
               >
-                <div class="modal-box">
+                <div class="modal-box bg-slate-800/50">
                   <form method="dialog">
                     <button
                       class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
