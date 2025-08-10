@@ -5,6 +5,14 @@ const url = 'redacted';
 
 Alpine.data('data', () => ({
   init() {
+    let pathname = window.location.pathname;
+
+    if (['/nest', '/', '/about'].includes(pathname)) {
+      this.setPath(pathname);
+    } else {
+      this.setPath('/');
+    }
+
     this.dummyData();
   },
 
