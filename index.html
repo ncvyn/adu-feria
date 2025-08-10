@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inside the Nest</title>
+    <title>AdU Feria Hub</title>
     <script src="src/data.js" type="module" defer></script>
     <link rel="stylesheet" href="src/style.css" />
   </head>
 
   <body x-data="data" class="select-none">
-    <div class="shadow-sm navbar bg-base-100">
+    <div class="shadow-sm navbar bg-base-100 fixed top-0 z-50">
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -32,15 +32,14 @@
             tabindex="0"
             class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box z-1"
           >
-            <li><a class="text-lg">Home</a></li>
-            <li><a class="text-lg">Marketplace</a></li>
-            <li><a class="text-lg">About Us</a></li>
+            <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
+            <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
           </ul>
         </div>
       </div>
       <div class="hidden navbar-center lg:flex">
         <ul class="menu menu-horizontal gap-x-8">
-          <li><a @click="setPath('nest')" class="text-lg">The Nest</a></li>
+          <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
           <li><a @click="setPath('/')" class="text-lg">(logo)</a></li>
           <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
         </ul>
@@ -48,47 +47,52 @@
       <div class="navbar-end"></div>
     </div>
 
-    <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
+    <div class="my-24">
+      <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
 
-    <div class="nest">
-      <p class="text-gray-400" x-show="isLoading">Loading Identities...</p>
-      <div
-        class="grid items-stretch grid-cols-1 gap-8 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
-      >
-        <template x-for="(res, i) in responses">
-          <div
-            class="border-2 shadow-lg border-base-content/20 card bg-base-100 hover:bg-base-200"
-            @click="Function(`mdl${i}.showModal()`)"
-          >
-            <figure>
-              <img :src="res.image" alt="Shoes" />
-            </figure>
-            <div class="card-body">
-              <div
-                class="badge badge-soft badge-primary"
-                x-text="res.serviceType"
-              ></div>
-              <div class="flex items-center justify-between">
-                <h2 class="card-title" x-text="res.serviceName"></h2>
-                <span class="text-xl" x-text="`₱${res.price}`"></span>
+      <div x-show="currentPath == 'feria'" x-transition>
+        <p class="text-gray-400" x-show="isLoading">Loading...</p>
+        <div
+          class="grid items-stretch grid-cols-1 gap-8 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
+        >
+          <template x-for="(res, i) in responses">
+            <div
+              class="border-2 shadow-lg border-base-content/20 card bg-base-100 hover:bg-base-200 dark:hover:contrast-80"
+              @click="Function(`mdl${i}.showModal()`)"
+            >
+              <figure>
+                <img :src="res.image" alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <div
+                  class="badge badge-soft badge-primary"
+                  x-text="res.serviceType"
+                ></div>
+                <div class="flex items-center justify-between">
+                  <h2 class="card-title" x-text="res.serviceName"></h2>
+                  <span class="text-xl" x-text="`₱${res.price}`"></span>
+                </div>
               </div>
+
+              <dialog
+                :id="`mdl${i}`"
+                class="modal modal-bottom md:modal-middle"
+              >
+                <div class="modal-box">
+                  <form method="dialog">
+                    <button
+                      class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
+                    >
+                      ✕
+                    </button>
+                  </form>
+                  <h3 class="text-lg font-bold" x-text="res.serviceName"></h3>
+                  <p class="py-4" x-text="res.description"></p>
+                </div>
+              </dialog>
             </div>
-
-            <dialog :id="`mdl${i}`" class="modal modal-bottom md:modal-middle">
-              <div class="modal-box">
-                <form method="dialog">
-                  <button
-                    class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
-                  >
-                    ✕
-                  </button>
-                </form>
-                <h3 class="text-lg font-bold" x-text="res.serviceName"></h3>
-                <p class="py-4" x-text="res.description"></p>
-              </div>
-            </dialog>
-          </div>
-        </template>
+          </template>
+        </div>
       </div>
     </div>
   </body>

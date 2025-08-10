@@ -5,9 +5,9 @@ const url = 'redacted';
 
 Alpine.data('data', () => ({
   init() {
-    let pathname = window.location.pathname;
+    let pathname = window.location.pathname.substring(1);
 
-    if (['/nest', '/', '/about'].includes(pathname)) {
+    if (['feria', 'about'].includes(pathname)) {
       this.setPath(pathname);
     } else {
       this.setPath('/');
