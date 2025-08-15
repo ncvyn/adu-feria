@@ -1,7 +1,7 @@
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 
-const url = 'redacted';
+const url = import.meta.env.VITE_URL;
 
 Alpine.data('data', () => ({
   init() {
@@ -13,7 +13,7 @@ Alpine.data('data', () => ({
       this.setPath('/');
     }
 
-    this.dummyData();
+    this.getData();
   },
 
   isLoading: false,
@@ -29,35 +29,7 @@ Alpine.data('data', () => ({
         return response.json();
       })
       .then((data) => {
-        this.responses = data['values'].map(
-          ([
-            timestamp,
-            email,
-            fullName,
-            instEmail,
-            personalEmail,
-            pageLink,
-            handleLink,
-            serviceType,
-            serviceName,
-            description,
-            price,
-            image,
-          ]) => ({
-            timestamp,
-            email,
-            fullName,
-            instEmail,
-            personalEmail,
-            pageLink,
-            handleLink,
-            serviceType,
-            serviceName,
-            description,
-            price,
-            image,
-          })
-        );
+        this.responses = data;
 
         console.log(this.responses);
         this.isLoading = false;

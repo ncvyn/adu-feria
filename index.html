@@ -1,110 +1,86 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="h-screen bg-fixed bg-no-repeat bg-cover bg-linear-180 from-slate-200 to-slate-400 scrollbar-hidden"
->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AdU Feria Hub</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <script src="src/data.js" type="module" defer></script>
-    <link rel="stylesheet" href="src/style.css" />
-  </head>
+<html lang="en"
+  class="h-screen bg-fixed bg-no-repeat bg-cover bg-linear-180 from-slate-200 to-slate-400 scrollbar-hidden">
 
-  <body x-data="data" class="select-none">
-    <div
-      class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2 backdrop-blur-sm"
-    >
-      <div class="navbar-start">
-        <div class="dropdown">
-          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabindex="0"
-            class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box"
-          >
-            <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
-            <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
-          </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdU Feria Hub</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script src="src/data.js" type="module" defer></script>
+  <link rel="stylesheet" href="src/style.css" />
+</head>
+
+<body x-data="data" class="select-none">
+  <div
+    class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2 backdrop-blur-sm">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
         </div>
-      </div>
-      <div class="hidden navbar-center lg:flex">
-        <ul class="items-center p-0 menu menu-horizontal gap-x-32">
-          <li>
-            <a @click="setPath('feria')" class="text-2xl">Feria</a>
-          </li>
-          <li>
-            <a @click="setPath('/')" class="p-0"
-              ><img class="w-20 h-20 undraggable" src="feria.svg"
-            /></a>
-          </li>
-          <li>
-            <a @click="setPath('about')" class="text-2xl">About Us</a>
-          </li>
+        <ul tabindex="0" class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box">
+          <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
+          <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
         </ul>
       </div>
-      <div class="navbar-end"></div>
     </div>
+    <div class="hidden navbar-center lg:flex">
+      <ul class="items-center p-0 menu menu-horizontal gap-x-32">
+        <li>
+          <a @click="setPath('feria')" class="text-2xl">Feria</a>
+        </li>
+        <li>
+          <a @click="setPath('/')" class="p-0"><img class="w-20 h-20 undraggable" src="feria.svg" /></a>
+        </li>
+        <li>
+          <a @click="setPath('about')" class="text-2xl">About Us</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-end"></div>
+  </div>
 
-    <div class="my-28">
-      <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
+  <div class="my-28">
+    <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
 
-      <div x-show="currentPath == 'feria'" x-transition>
-        <p class="text-gray-400" x-show="isLoading">Loading...</p>
-        <div
-          class="grid items-stretch grid-cols-1 gap-5 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
-        >
-          <template x-for="(res, i) in responses">
-            <div
-              class="transition-transform duration-150 border-2 shadow-lg cursor-pointer border-base-content/20 card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105 lg:oncl"
-              @click="Function(`mdl${i}.showModal()`)"
-            >
-              <figure>
-                <!-- <img :src="res.image" alt="Shoes" /> -->
-              </figure>
-              <div class="card-body">
-                <div class="badge badge-primary" x-text="res.serviceType"></div>
-                <div class="flex items-center justify-between">
-                  <h2 class="card-title" x-text="res.serviceName"></h2>
-                  <span class="text-xl" x-text="`₱${res.price}`"></span>
-                </div>
+    <div x-show="currentPath == 'feria'" x-transition>
+      <p class="text-gray-400" x-show="isLoading">Loading...</p>
+      <div
+        class="grid items-stretch grid-cols-1 gap-5 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7">
+        <template x-for="(res, i) in responses">
+          <div
+            class="transition-transform duration-150 border-2 shadow-lg cursor-pointer border-base-content/20 card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105 lg:oncl"
+            @click="Function(`mdl${i}.showModal()`)">
+            <figure>
+              <img :src="res['Thumbnail Image']" alt="" />
+            </figure>
+            <div class="card-body">
+              <div class="badge badge-primary" x-text="res.Type"></div>
+              <div class="flex items-center justify-between">
+                <h2 class="card-title" x-text="res.Name1"></h2>
+                <span class="text-xl" x-text="`₱${res.Price}`"></span>
               </div>
-
-              <dialog
-                :id="`mdl${i}`"
-                class="transition-none modal modal-bottom md:modal-middle"
-              >
-                <div class="backdrop-blur-sm modal-box bg-slate-800/50">
-                  <form method="dialog">
-                    <button
-                      class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
-                    >
-                      ✕
-                    </button>
-                  </form>
-                  <h3 class="text-lg font-bold" x-text="res.serviceName"></h3>
-                  <p class="py-4" x-text="res.description"></p>
-                </div>
-              </dialog>
             </div>
-          </template>
-        </div>
+
+            <dialog :id="`mdl${i}`" class="transition-none modal modal-bottom md:modal-middle">
+              <div class="backdrop-blur-sm modal-box bg-slate-800/50">
+                <form method="dialog">
+                  <button class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                <h3 class="text-lg font-bold" x-text="res.Name1"></h3>
+                <p class="py-4" x-text="res.Description"></p>
+              </div>
+            </dialog>
+          </div>
+        </template>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
