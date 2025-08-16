@@ -18,6 +18,8 @@ Alpine.data('data', () => ({
 
   isLoading: false,
   responses: [],
+  searchQuery: '',
+  filterQuery: 'Show all',
 
   getData() {
     this.isLoading = true;

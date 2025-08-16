@@ -91,15 +91,17 @@
               type="search"
               class="bg-none"
               autocomplete="off"
-              placeholder="Search"
+              placeholder="Search..."
+              x-model.debounce.500ms="searchQuery"
             />
             <kbd class="invisible lg:visible bg-slate-500/60 kbd kbd-md">/</kbd>
           </label>
 
           <select
             class="w-full lg:w-1/4 lg:flex-none bg-slate-500/60 select select-lg"
+            x-model="filterQuery"
           >
-            <option selected>Filter: Show all</option>
+            <option selected>(Show all)</option>
             <option>Academic Commission</option>
             <option>Food</option>
             <option>Arts and Crafts</option>
@@ -115,6 +117,8 @@
           <template x-for="(res, i) in responses">
             <div
               class="transition-transform duration-150 border-2 shadow-lg cursor-pointer border-base-content/20 card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105"
+              x-show="res.Name1.toLowerCase().includes(searchQuery.toLowerCase()) && (res.Type === filterQuery || filterQuery.includes('Show all'))"
+              x-transition
               @click="Function(`mdl${i}.showModal()`)"
             >
               <figure>
@@ -127,7 +131,7 @@
               <div class="card-body">
                 <div class="py-0 italic" x-text="res.Type"></div>
                 <div class="flex items-center justify-between gap-3">
-                  <h2 class="card-title" x-text="res.Name1"></h2>
+                  <h2 class="text-xl card-title" x-text="res.Name1"></h2>
                   <span
                     class="text-xl font-bold"
                     x-text="`₱${res.Price}`"
