@@ -61,13 +61,56 @@
       <div class="navbar-end"></div>
     </div>
 
-    <div class="my-28">
+    <div class="my-22 lg:my-30">
       <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
 
-      <div x-show="currentPath == 'feria'" x-transition>
+      <div
+        x-show="currentPath == 'feria'"
+        x-transition
+        class="lg:mx-24 xl:mx-96"
+      >
+        <div class="flex flex-col gap-5 m-3 mb-5 lg:flex-row">
+          <label class="w-full lg:flex-1 input input-lg bg-slate-500/60">
+            <svg
+              class="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input
+              type="search"
+              class="bg-none"
+              autocomplete="off"
+              placeholder="Search"
+            />
+            <kbd class="invisible lg:visible bg-slate-500/60 kbd kbd-md">/</kbd>
+          </label>
+
+          <select
+            class="w-full lg:w-1/4 lg:flex-none bg-slate-500/60 select select-lg"
+          >
+            <option selected>Filter: Show all</option>
+            <option>Academic Commission</option>
+            <option>Food</option>
+            <option>Arts and Crafts</option>
+            <option>Pre-loved</option>
+            <option>Others</option>
+          </select>
+        </div>
+
         <p class="text-gray-400" x-show="isLoading">Loading...</p>
         <div
-          class="grid items-stretch grid-cols-1 gap-5 m-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-7"
+          class="grid items-stretch grid-cols-1 gap-5 m-3 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-5"
         >
           <template x-for="(res, i) in responses">
             <div
@@ -82,10 +125,13 @@
                 />
               </figure>
               <div class="card-body">
-                <div class="badge badge-primary" x-text="res.Type"></div>
-                <div class="flex items-center justify-between">
+                <div class="py-0 italic" x-text="res.Type"></div>
+                <div class="flex items-center justify-between gap-3">
                   <h2 class="card-title" x-text="res.Name1"></h2>
-                  <span class="text-xl" x-text="`₱${res.Price}`"></span>
+                  <span
+                    class="text-xl font-bold"
+                    x-text="`₱${res.Price}`"
+                  ></span>
                 </div>
               </div>
 
@@ -93,7 +139,7 @@
                 :id="`mdl${i}`"
                 class="cursor-default md:transition-none modal modal-bottom md:modal-middle"
               >
-                <div class="backdrop-blur-sm modal-box bg-slate-800/50">
+                <div class="backdrop-blur-sm bg-slate-800/50 modal-box">
                   <form method="dialog">
                     <button
                       class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
@@ -102,11 +148,10 @@
                     </button>
                   </form>
 
-                  <div class="flex gap-1.5 undraggable">
+                  <div class="flex flex-col undraggable">
                     <h3 class="text-lg font-bold" x-text="res.Name1"></h3>
                     <p class="text-lg" x-text="`by ${res.Name}`"></p>
                   </div>
-
                   <p class="pt-4 undraggable" x-text="res.Description"></p>
                 </div>
               </dialog>

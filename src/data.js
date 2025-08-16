@@ -58,8 +58,8 @@ Alpine.data('data', () => ({
       'Facebook Account/Page Link': 'google.com',
       'Instagram Handle': '@neviszany',
       Type: 'Food',
-      Name1: 'fried fries',
-      Description: 'yuh ',
+      Name1: "Nevan's Fries",
+      Description: 'French fries, yes.',
       Price: 80,
       image: '',
     });
