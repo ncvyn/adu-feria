@@ -13,7 +13,7 @@ Alpine.data('data', () => ({
       this.setPath('/');
     }
 
-    this.getData();
+    this.dummyData();
   },
 
   isLoading: false,
@@ -21,7 +21,10 @@ Alpine.data('data', () => ({
 
   getData() {
     this.isLoading = true;
-    fetch(url)
+    fetch(url, {
+      method: 'GET',
+      credentials: 'include',
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -29,9 +32,14 @@ Alpine.data('data', () => ({
         return response.json();
       })
       .then((data) => {
-        this.responses = data;
-
+        this.responses = data.map((e) => {
+          return {
+            ...e,
+            image: `data:${e.image['$content-type']};base64,${e.image['$content']}`,
+          };
+        });
         console.log(this.responses);
+
         this.isLoading = false;
       })
       .catch((error) => {
@@ -41,17 +49,18 @@ Alpine.data('data', () => ({
 
   dummyData() {
     this.responses = new Array(10).fill({
-      timestamp: '06/08/2025 13:50:57',
-      email: 'email@email.com',
-      fullName: 'fname',
-      instEmail: 'iemail',
-      personalEmail: 'persemail',
-      pageLink: 'fbacc',
-      handleLink: 'handle',
-      serviceType: 'Others',
-      serviceName: 'business',
-      description: 'description',
-      price: '457',
+      Id: 5,
+      'Start time': 45881.4073148148,
+      'Completion time': 45881.4079166667,
+      Email: 'nevan.angelo.catoy@k12.adamson.edu.ph',
+      Name: 'Nevan Angelo Catoy',
+      Consent: 'I consent.',
+      'Facebook Account/Page Link': 'google.com',
+      'Instagram Handle': '@neviszany',
+      Type: 'Food',
+      Name1: 'fried fries',
+      Description: 'yuh ',
+      Price: 80,
       image: '',
     });
   },
