@@ -62,8 +62,6 @@
     </div>
 
     <div class="my-22 lg:my-30">
-      <p x-cloak x-transition x-show="currentPath == '/'">Test</p>
-
       <div
         x-show="currentPath == 'feria'"
         x-transition
@@ -116,14 +114,14 @@
         >
           <template x-for="(res, i) in responses">
             <div
-              class="transition-transform duration-150 border-2 shadow-lg cursor-pointer border-base-content/20 card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105"
+              class="w-full h-64 transition-transform duration-150 shadow-lg cursor-pointer w-overflow-hidden card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105"
               x-show="res.Name1.toLowerCase().includes(searchQuery.toLowerCase()) && (res.Type === filterQuery || filterQuery.includes('Show all'))"
               x-transition
               @click="Function(`mdl${i}.showModal()`)"
             >
-              <figure>
+              <figure class="w-full h-full">
                 <img
-                  class="object-contain undraggable"
+                  class="object-fill max-w-md undraggable"
                   :src="res['image']"
                   alt=""
                 />
