@@ -52,7 +52,6 @@ Alpine.data('data', () => ({
             })(),
           };
         });
-        console.log(this.responses);
 
         this.isLoading = false;
       })
