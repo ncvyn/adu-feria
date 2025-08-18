@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  class="h-screen bg-fixed bg-no-repeat bg-cover bg-linear-180 from-slate-200 to-slate-400 scrollbar-hidden"
+  class="h-screen bg-[url(/sv-facade.jpg)] bg-fixed bg-no-repeat bg-center bg-cover scrollbar-hidden"
 >
   <head>
     <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
 
   <body x-data="data" class="select-none">
     <div
-      class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2 backdrop-blur-sm"
+      class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2 backdrop-blur-md"
     >
       <div class="navbar-start">
         <div class="dropdown">
@@ -39,7 +39,8 @@
             class="w-40 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box"
           >
             <li><a @click="setPath('feria')" class="text-lg">Feria</a></li>
-            <li><a @click="setPath('about')" class="text-lg">About Us</a></li>
+            <li><a @click="setPath('/')" class="text-lg">Home</a></li>
+            <li><a @click="setPath('about')" class="text-lg">About</a></li>
           </ul>
         </div>
       </div>
@@ -50,25 +51,28 @@
           </li>
           <li>
             <a @click="setPath('/')" class="p-0"
-              ><img class="w-20 h-20 undraggable" src="feria.svg"
+              ><img class="w-20 h-20 pointer-events-none" src="feria.svg"
             /></a>
           </li>
           <li>
-            <a @click="setPath('about')" class="text-2xl">About Us</a>
+            <a @click="setPath('about')" class="text-2xl">About</a>
           </li>
         </ul>
       </div>
       <div class="navbar-end"></div>
     </div>
 
-    <div class="my-22 lg:my-30">
+    <div>
       <div
+        x-cloak
         x-show="currentPath == 'feria'"
         x-transition
-        class="lg:mx-24 xl:mx-96"
+        class="my-22 lg:my-30 lg:mx-24 xl:mx-96"
       >
         <div class="flex flex-col gap-5 m-3 mb-5 lg:flex-row">
-          <label class="w-full lg:flex-1 input input-lg bg-slate-500/60">
+          <label
+            class="w-full lg:flex-1 input input-lg bg-slate-500/60 backdrop-blur-md"
+          >
             <svg
               class="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
@@ -86,17 +90,18 @@
               </g>
             </svg>
             <input
+              id="query"
               type="search"
               class="bg-none"
               autocomplete="off"
               placeholder="Search..."
               x-model.debounce.500ms="searchQuery"
             />
-            <kbd class="invisible lg:visible bg-slate-500/60 kbd kbd-md">/</kbd>
           </label>
 
           <select
-            class="w-full lg:w-1/4 lg:flex-none bg-slate-500/60 select select-lg"
+            id="type"
+            class="w-full cursor-pointer backdrop-blur-md lg:w-1/4 lg:flex-none bg-slate-500/60 select select-lg"
             x-model="filterQuery"
           >
             <option selected>(Show all)</option>
@@ -114,14 +119,14 @@
         >
           <template x-for="(res, i) in responses">
             <div
-              class="w-full h-64 transition-transform duration-150 shadow-lg cursor-pointer w-overflow-hidden card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105"
+              class="w-full h-64 transition-transform duration-150 shadow-lg cursor-pointer backdrop-blur-md w-overflow-hidden card bg-slate-500/60 hover:bg-slate-400/80 lg:hover:scale-105"
               x-show="res.Name1.toLowerCase().includes(searchQuery.toLowerCase()) && (res.Type === filterQuery || filterQuery.includes('Show all'))"
               x-transition
               @click="Function(`mdl${i}.showModal()`)"
             >
               <figure class="w-full h-full">
                 <img
-                  class="object-fill max-w-md undraggable"
+                  class="object-fill max-w-md pointer-events-none"
                   :src="res['image']"
                   alt=""
                 />
@@ -141,7 +146,7 @@
                 :id="`mdl${i}`"
                 class="cursor-default md:transition-none modal modal-bottom md:modal-middle"
               >
-                <div class="backdrop-blur-sm bg-slate-800/50 modal-box">
+                <div class="backdrop-blur-md bg-slate-800/50 modal-box">
                   <form method="dialog">
                     <button
                       class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
@@ -151,14 +156,130 @@
                   </form>
 
                   <div class="flex flex-col undraggable">
-                    <h3 class="text-lg font-bold" x-text="res.Name1"></h3>
-                    <p class="text-lg" x-text="`by ${res.Name}`"></p>
+                    <h3
+                      class="text-lg font-bold"
+                      x-text="`${res.Name1} (₱${res.Price})`"
+                    ></h3>
+                    <p
+                      class="text-lg"
+                      x-text="`by ${res.Name} ${res['Instagram Handle']}`"
+                    ></p>
                   </div>
                   <p class="pt-4 undraggable" x-text="res.Description"></p>
+                  <br />
+                  <a
+                    target="_blank"
+                    rel="noopener"
+                    class="underline undraggable"
+                    :href="res['Facebook Account/Page Link']"
+                    >Their website</a
+                  >
                 </div>
               </dialog>
             </div>
           </template>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center h-screen xl:mx-16"
+        x-cloak
+        x-transition
+        x-show="currentPath == '/'"
+      >
+        <div class="backdrop-blur-md card bg-slate-500/60">
+          <figure>
+            <img class="undraggable" src="feria.svg" alt="AdU Feria logo" />
+          </figure>
+          <div class="card-body">
+            <p class="text-2xl text-justify">
+              AdU Feria Hub is a digital commission platform dedicated to
+              showcasing the creativity and entrepreneurial spirit of Adamson
+              University students. It serves as a centralized space where
+              students can post and list their products, making them accessible
+              to the AdU community. By providing this platform, the commission
+              hub encourages innovation, collaboration, and exposure for
+              student-led initiatives and business ventures. This project was
+              made possible through the partnership of the SSG ABM Strand
+              leadership and the Adamson University Robotics Club, whose
+              technical expertise helped transform this vision into a functional
+              and user-friendly website.
+            </p>
+          </div>
+        </div>
+
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://forms.office.com/Pages/ResponsePage.aspx?id=2we_rd0OaUGEgWdA5OmYZrkkeIUoML9LicMh2HZutoxURDAyNjEwVVgxQjJUVFlYVjIxRkFIT1ZVUC4u"
+        >
+          <div
+            role="alert"
+            class="border-0 alert bg-slate-500/60 backdrop-blur-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="w-6 h-6 stroke-white shrink-0"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span>Want to add your business to the Feria? Click me!</span>
+          </div>
+        </a>
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center h-screen gap-5 pointer-events-none xl:mx-16 my-90 md:my-0"
+        x-cloak
+        x-transition
+        x-show="currentPath == 'about'"
+      >
+        <div class="backdrop-blur-md card md:card-side bg-slate-500/60">
+          <figure class="w-64 md:w-256">
+            <img
+              class="undraggable"
+              src="bernasor.jpg"
+              alt="Princess Sarah A. Bernasor"
+            />
+          </figure>
+          <div class="card-body">
+            <p class="text-2xl text-justify">
+              The AdU Feria Hub was initiated by Princess Sarah A. Bernasor, the
+              SSG ABM Strand Representative. Recognizing the need for a
+              structured space where students could promote their products and
+              projects, she spearheaded the creation of this platform. Guided by
+              her leadership and vision, the commission hub was designed to give
+              students the opportunity to showcase their work while fostering
+              community engagement and collaboration.
+            </p>
+          </div>
+        </div>
+
+        <div class="backdrop-blur-md card md:card-side bg-slate-500/60">
+          <figure class="w-64 md:w-256">
+            <img
+              class="undraggable"
+              src="catoy.jpg"
+              alt="Nevan Angelo R. Catoy"
+            />
+          </figure>
+          <div class="card-body">
+            <p class="text-2xl text-justify">
+              The website was developed by Nevan Angelo R. Catoy, a dedicated
+              member of the Adamson University Robotics Club. With his skills in
+              website design and programming, he played a vital role in building
+              the platform and ensuring that it could effectively serve the
+              needs of our Klasmeyts. His contribution turned this initiative
+              from an idea into a fully realized digital space for the strand.
+            </p>
+          </div>
         </div>
       </div>
     </div>
