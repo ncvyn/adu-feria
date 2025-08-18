@@ -13,7 +13,7 @@ Alpine.data('data', () => ({
       this.setPath('/');
     }
 
-    this.dummyData();
+    this.getData();
   },
 
   isLoading: false,
