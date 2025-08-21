@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_URL: ${{ secrets.VITE_URL }}
+      VITE_TOKEN: ${{ secrets.VITE_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
