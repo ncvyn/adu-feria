@@ -24,12 +24,8 @@ Alpine.data('data', () => ({
 
   getData() {
     this.isLoading = true
-    fetch(url, {
+    fetch(`${url}&key=${token}`, {
       method: 'GET',
-      credentials: 'include',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
     })
       .then(response => {
         if (!response.ok) {
