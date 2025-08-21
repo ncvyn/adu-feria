@@ -35,7 +35,9 @@ Alpine.data('data', () => ({
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
-        return response.text()
+        let text = response.text()
+        console.log(text)
+        return text
       })
       .then(data => {
         data.sort(() => Math.random() - 0.5)
