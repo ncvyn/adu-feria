@@ -6,6 +6,8 @@ const token = import.meta.env.VITE_TOKEN
 
 Alpine.data('data', () => ({
   init() {
+    this.responses = sessionStorage.responses || []
+
     let pathname = window.location.hash.slice(1)
 
     if (['feria', 'about'].includes(pathname)) {
@@ -23,6 +25,11 @@ Alpine.data('data', () => ({
   filterQuery: 'Show all',
 
   getData() {
+    if (sessionStorage.responses) {
+      this.responses = sessionStorage.responses
+      return
+    }
+
     this.isLoading = true
     fetch(`${url}&key=${token}`, {
       method: 'GET',
@@ -52,6 +59,7 @@ Alpine.data('data', () => ({
             })(),
           }
         })
+        sessionStorage.responses = this.responses
 
         this.isLoading = false
       })
