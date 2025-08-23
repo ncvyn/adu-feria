@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 
-@plugin "daisyui" {
+@theme {
+  --font-cambria: 'Cambria', sans-serif;
+}
+
+@plugin 'daisyui' {
   exclude: rootscrollgutter;
   themes: light --default, dark --prefersdark;
 }

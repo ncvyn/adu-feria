@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
 
-  <body x-data="data" class="bg-transparent select-none">
+  <body
+    x-data="data"
+    class="text-white bg-transparent select-none font-cambria">
     <div
       class="shadow-sm navbar bg-linear-180 from-slate-500 from-10% to-90% to-slate-400/50 fixed top-0 z-1 p-2 backdrop-blur-md">
       <div class="navbar-start">
@@ -147,7 +149,7 @@
                   <a
                     target="_blank"
                     rel="noopener"
-                    class="underline undraggable"
+                    class="underline"
                     :href="res['Facebook Account/Page Link']"
                     >Their website</a
                   >
@@ -159,35 +161,29 @@
       </div>
 
       <div
-        class="flex flex-col items-center justify-center"
+        class="grid grid-cols-1 gap-10 p-5 rounded-md justify-items-center md:grid-cols-4 undraggable bg-slate-500/60 backdrop-blur-md"
         x-cloak
         x-transition
         x-show="currentPath == '/'">
-        <div class="backdrop-blur-md card bg-slate-500/60">
-          <figure>
-            <img
-              class="w-50 undraggable"
-              src="feria.svg"
-              alt="AdU Feria logo" />
-          </figure>
-          <div class="card-body">
-            <p class="text-2xl text-justify">
-              AdU Feria Hub is a digital commission platform dedicated to
-              showcasing the creativity and entrepreneurial spirit of Adamson
-              University students. It serves as a centralized space where
-              students can post and list their products, making them accessible
-              to the AdU community. By providing this platform, the commission
-              hub encourages innovation, collaboration, and exposure for
-              student-led initiatives and business ventures. This project was
-              made possible through the partnership of the SSG ABM Strand
-              leadership and the Adamson University Robotics Club, whose
-              technical expertise helped transform this vision into a functional
-              and user-friendly website.
-            </p>
-          </div>
-        </div>
+        <img
+          class="rounded-md pointer-events-none w-50"
+          src="feria.svg"
+          alt="AdU Feria logo" />
+        <p class="col-span-2 text-xl text-justify md:col-span-3">
+          AdU Feria Hub is a digital commission platform dedicated to showcasing
+          the creativity and entrepreneurial spirit of Adamson University
+          students. It serves as a centralized space where students can post and
+          list their products, making them accessible to the AdU community. By
+          providing this platform, the commission hub encourages innovation,
+          collaboration, and exposure for student-led initiatives and business
+          ventures. This project was made possible through the partnership of
+          the SSG ABM Strand leadership and the Adamson University Robotics
+          Club, whose technical expertise helped transform this vision into a
+          functional and user-friendly website.
+        </p>
 
         <a
+          class="md:col-start-2 md:col-span-4"
           target="_blank"
           rel="noopener"
           href="https://forms.office.com/Pages/ResponsePage.aspx?id=2we_rd0OaUGEgWdA5OmYZrkkeIUoML9LicMh2HZutoxURDAyNjEwVVgxQjJUVFlYVjIxRkFIT1ZVUC4u">
@@ -211,48 +207,36 @@
       </div>
 
       <div
-        class="flex flex-col items-center justify-center gap-5 pointer-events-none"
+        class="grid grid-cols-1 gap-10 p-5 rounded-md pointer-events-none justify-items-center md:grid-cols-4 undraggable bg-slate-500/60 backdrop-blur-md"
         x-cloak
         x-transition
         x-show="currentPath == 'about'">
-        <div class="backdrop-blur-md card md:card-side bg-slate-500/60">
-          <figure class="w-64 md:w-256">
-            <img
-              class="undraggable"
-              src="bernasor.jpg"
-              alt="Princess Sarah A. Bernasor" />
-          </figure>
-          <div class="card-body">
-            <p class="text-2xl text-justify">
-              The AdU Feria Hub was initiated by Princess Sarah A. Bernasor, the
-              SSG ABM Strand Representative. Recognizing the need for a
-              structured space where students could promote their products and
-              projects, she spearheaded the creation of this platform. Guided by
-              her leadership and vision, the commission hub was designed to give
-              students the opportunity to showcase their work while fostering
-              community engagement and collaboration.
-            </p>
-          </div>
-        </div>
+        <img
+          class="rounded-md w-50"
+          src="bernasor.jpg"
+          alt="Princess Sarah A. Bernasor" />
+        <p class="col-span-2 text-xl text-justify md:col-span-3">
+          The AdU Feria Hub was initiated by Princess Sarah A. Bernasor, the SSG
+          ABM Strand Representative. Recognizing the need for a structured space
+          where students could promote their products and projects, she
+          spearheaded the creation of this platform. Guided by her leadership
+          and vision, the commission hub was designed to give students the
+          opportunity to showcase their work while fostering community
+          engagement and collaboration.
+        </p>
 
-        <div class="backdrop-blur-md card md:card-side bg-slate-500/60">
-          <figure class="w-64 md:w-256">
-            <img
-              class="undraggable"
-              src="catoy.jpg"
-              alt="Nevan Angelo R. Catoy" />
-          </figure>
-          <div class="card-body">
-            <p class="text-2xl text-justify">
-              The website was developed by Nevan Angelo R. Catoy, a dedicated
-              member of the Adamson University Robotics Club. With his skills in
-              website design and programming, he played a vital role in building
-              the platform and ensuring that it could effectively serve the
-              needs of our Klasmeyts. His contribution turned this initiative
-              from an idea into a fully realized digital space for the strand.
-            </p>
-          </div>
-        </div>
+        <img
+          class="rounded-md w-50"
+          src="catoy.jpg"
+          alt="Nevan Angelo R. Catoy" />
+        <p class="col-span-2 text-xl text-justify md:col-span-3">
+          The website was developed by Nevan Angelo R. Catoy, a dedicated member
+          of the Adamson University Robotics Club. With his skills in website
+          design and programming, he played a vital role in building the
+          platform and ensuring that it could effectively serve the needs of our
+          Klasmeyts. His contribution turned this initiative from an idea into a
+          fully realized digital space for the strand.
+        </p>
       </div>
     </div>
   </body>
