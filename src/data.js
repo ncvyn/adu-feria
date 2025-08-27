@@ -1,8 +1,13 @@
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
+import { FeriaStore } from './db.js'
+await FeriaStore.init()
+
 const url = import.meta.env.VITE_URL
 const token = import.meta.env.VITE_TOKEN
+
+const data = JSON.parse(await FeriaStore.load('formData'))
 
 Alpine.data('data', () => ({
   init() {
@@ -14,8 +19,8 @@ Alpine.data('data', () => ({
       this.setPath('/')
     }
 
-    if (sessionStorage.responses) {
-      this.responses = JSON.parse(sessionStorage.responses)
+    if (data) {
+      this.responses = data
       this.responses.sort(() => Math.random() - 0.5)
     } else {
       this.getData()
@@ -38,15 +43,15 @@ Alpine.data('data', () => ({
         }
         return response.json()
       })
-      .then(data => {
+      .then(async data => {
         data.sort(() => Math.random() - 0.5)
 
         this.responses = data.map(e => {
           return {
             ...e,
             'image': `data:${e.image['$content-type']};base64,${e.image['$content']}`,
-            'Facebook Account/Page Link': (() => {
-              const link = e['Facebook Account/Page Link']
+            'Link': (() => {
+              const link = e['Link']
               link.startsWith('http://') || link.startsWith('https://')
                 ? link
                 : `https://${link}`
@@ -57,32 +62,13 @@ Alpine.data('data', () => ({
             })(),
           }
         })
-        sessionStorage.responses = JSON.stringify(this.responses)
+        await FeriaStore.save('formData', JSON.stringify(this.responses))
 
         this.isLoading = false
       })
       .catch(error => {
         console.log('Error:', error)
       })
-  },
-
-  dummyData() {
-    this.responses = new Array(10).fill({
-      'Id': 5,
-      'Start time': 45881.4073148148,
-      'Completion time': 45881.4079166667,
-      'Email': 'nevan.angelo.catoy@k12.adamson.edu.ph',
-      'Name': 'Nevan Angelo Catoy',
-      'Consent': 'I consent.',
-      'Facebook Account/Page Link': 'https://google.com',
-      'Instagram Handle': '(@neviszany)',
-      'Type': 'Food',
-      'Name1': "Nevan's Fries",
-      'Description': 'French fries, yes.',
-      'Price': 80,
-      'image': '',
-    })
-    sessionStorage.responses = JSON.stringify(this.responses)
   },
 
   setPath(path) {

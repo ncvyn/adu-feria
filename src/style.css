@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-cambria: 'Cambria', sans-serif;
+  --font-cambria: 'Cambria', 'Times New Roman', serif;
 }
 
 @plugin 'daisyui' {
