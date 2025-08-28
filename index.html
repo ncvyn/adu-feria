@@ -100,7 +100,9 @@
           </select>
         </div>
 
-        <p class="text-gray-400" x-show="isLoading">Loading...</p>
+        <div class="flex justify-center" x-show="isLoading">
+          <span class="w-40 m-auto bg-[#315176] loading loading-ring"></span>
+        </div>
         <div
           class="grid items-stretch grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-5">
           <template x-for="(res, i) in responses">

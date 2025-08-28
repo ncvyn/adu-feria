@@ -2,15 +2,12 @@ import Alpine from 'alpinejs'
 window.Alpine = Alpine
 
 import { FeriaStore } from './db.js'
-await FeriaStore.init()
 
 const url = import.meta.env.VITE_URL
 const token = import.meta.env.VITE_TOKEN
 
-const data = JSON.parse(await FeriaStore.load('formData'))
-
 Alpine.data('data', () => ({
-  init() {
+  async init() {
     let pathname = window.location.hash.slice(1)
 
     if (['feria', 'about'].includes(pathname)) {
@@ -19,12 +16,7 @@ Alpine.data('data', () => ({
       this.setPath('/')
     }
 
-    if (data) {
-      this.responses = data
-      this.responses.sort(() => Math.random() - 0.5)
-    } else {
-      this.getData()
-    }
+    await this.getData()
   },
 
   isLoading: false,
@@ -32,8 +24,20 @@ Alpine.data('data', () => ({
   searchQuery: '',
   filterQuery: 'Show all',
 
-  getData() {
+  async getData() {
     this.isLoading = true
+
+    await FeriaStore.init()
+    await FeriaStore.purge()
+
+    const data = JSON.parse(await FeriaStore.load('formData'))
+    if (data) {
+      this.responses = data
+      this.responses.sort(() => Math.random() - 0.5)
+      this.isLoading = false
+      return
+    }
+
     fetch(`${url}&key=${token}`, {
       method: 'GET',
     })

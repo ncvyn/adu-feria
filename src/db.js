@@ -18,7 +18,11 @@ export const FeriaStore = {
 
   async save(key, json) {
     const tx = this.db.transaction('FeriaStore', 'readwrite')
-    tx.objectStore('FeriaStore').put({ id: key, data: json })
+    tx.objectStore('FeriaStore').put({
+      id: key,
+      data: json,
+      timestamp: Date.now(),
+    })
     return tx.complete
   },
 
@@ -28,5 +32,27 @@ export const FeriaStore = {
       const request = tx.objectStore('FeriaStore').get(key)
       request.onsuccess = () => resolve(request.result?.data || null)
     })
+  },
+
+  async purge() {
+    const VALID_FOR_MINUTES = 30
+
+    const cutoff = Date.now() - VALID_FOR_MINUTES * 60 * 1000
+    const tx = this.db.transaction('FeriaStore', 'readwrite')
+    const store = tx.objectStore('FeriaStore')
+    const cursorRequest = store.openCursor()
+
+    cursorRequest.onsuccess = e => {
+      const cursor = e.target.result
+      if (!cursor) return
+
+      const record = cursor.value
+      if (record.timestamp < cutoff) {
+        cursor.delete()
+      }
+      cursor.continue()
+    }
+
+    return tx.complete
   },
 }
